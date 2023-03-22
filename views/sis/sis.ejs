@@ -1,0 +1,47 @@
+<%- include("../layaouts/cabecera.ejs") %>
+            <div class="row">
+                <div class="col-md-6 p-4 my-auto">
+                    <form method="post" class="card card-body" id="datosForm" action="/sis">
+                        <div class="form-group">
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" autofocus required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="tipo" name="tipo" placeholder="Tipo" class="form-control" required>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary" type="submit">
+                            Guardar
+                        </button>
+                    </form> 
+                </div>
+
+                <div class="container">
+                    <br/>
+                    <br/>
+                    <br/>   
+                    <table class="table table-light table-responsive">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Zona</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <% for( let sis = 0; sis < sist.length; sis++ ) { %>
+                                    <tr>
+                                        <td> <%=sist[sis].id%> </td> 
+                                        <td> <%=sist[sis].fecha%> </td>
+                                        <td> <%=sist[sis].tipo%> </td>
+                                        <td> <%=sist[sis].zona%> </td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+<%- include("../layaouts/footer.ejs") %>
+
+
+
