@@ -10,14 +10,41 @@
     <body>
         <main class="conteiner-fluid">
             <div class="row">
-                <div class="col-md-6 p-4 my-auto">
+                <lavel class="col-md-6 p-4 my-auto">
                     <form method="post" class="card card-body" id="datosForm" action="/sis">
                         <div class="form-group">
                             <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-control" autofocus required>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="tipo" name="tipo" placeholder="Tipo" class="form-control" required>
+                            <input type="text" id="zona" name="zona" placeholder="zona" class="form-control" required>
                         </div>
+                            <input type="text" id="inInfo" name="inInfo" value="" style="display: none;"></input>
+                        <fieldset>
+                            <legend>Seleccione tipo de Siniestro</legend>
+                            <lavel>
+                                <input type="radio" id="tipoIncendio" name="tipo" value="inc" onclick="desplegarInc()"> Incendio
+                            </lavel>
+                            <select name="incendio" id="inc" style="display:none">
+                                <option>Prueba 1</option>
+                                <option>Prueba 2</option>
+                            </select>
+                            <lavel>
+                                <input type="radio" id="tipoRescate" name="tipo" onclick="desplegarResc()"> Rescate
+                            </lavel>
+                                <div id="resc" style="display:none">
+                                    <select name="rescate">
+                                        <option>Prueba 3</option>
+                                        <option>Prueba 4</option>
+                                    </select>
+                                </div>
+                            <lavel>
+                                <input type="radio" id="tipoAccidente" name="tipo" onclick="desplegarAcc()"> Accidente
+                            </lavel>
+                            <select name="accidente" id="acc" style="display:none">
+                                <option>Prueba 5</option>
+                                <option>Prueba 6</option>
+                            </select>
+                        </fieldset>
                         <br>
                         <button class="btn btn-primary" type="submit">
                             Guardar
@@ -36,6 +63,7 @@
                                 <th>Fecha</th>
                                 <th>Tipo</th>
                                 <th>Zona</th>
+                                <th>Siniestro</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -45,6 +73,7 @@
                                         <td> <%=sist[sis].fecha%> </td>
                                         <td> <%=sist[sis].tipo%> </td>
                                         <td> <%=sist[sis].zona%> </td>
+                                        <td> <%=sist[sis].siniestro%> </td>
                                     </tr>
                                 <% } %>
                             </tbody>
@@ -53,8 +82,35 @@
             </div>
         </main> 
         <script>
-            function dateFormat(){
-                date = new Date().toLocaleDateString()
+            var siniestro = "";
+            function desplegarInc(){
+                document.getElementById('inc').style.display = 'block';
+                document.getElementById('resc').style.display = 'none';
+                document.getElementById('acc').style.display = 'none';
+                siniestro = "Incendio";
+                document.getElementById('inInfo').value = siniestro;
+                console.log(siniestro);
+            }
+            function desplegarResc(){
+                document.getElementById('inc').style.display = 'none';
+                document.getElementById('resc').style.display = 'block';
+                document.getElementById('acc').style.display = 'none';
+                siniestro = "Rescate"; 
+                document.getElementById('inInfo').value = siniestro;
+                console.log(siniestro);
+            }
+            function desplegarAcc(){
+                document.getElementById('inc').style.display = 'none';
+                document.getElementById('resc').style.display = 'none';
+                document.getElementById('acc').style.display = 'block';
+                siniestro = "Accidente";
+                document.getElementById('inInfo').value = siniestro;
+                console.log(siniestro);
+            }
+
+            function getRadioButtonSelectedValue(ctrl){
+                for(i=0;i<ctrl.length;i++)
+                    if(ctrl[i].checked) return ctrl[i].value;
             }
         </script>
     </body>
